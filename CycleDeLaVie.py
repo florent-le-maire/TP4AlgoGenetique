@@ -1,6 +1,9 @@
 import random
 import string
 from Entity import Entity
+from EntityVille import EntityVille
+from Ville import Ville
+
 
 # def tri_ins(t, j=1):
 #     if j < len(t):
@@ -31,48 +34,42 @@ class CycleDeLaVie:
         copy_des_entity[:] = self.listDesEntity
         self.tri_insertion(copy_des_entity)
         copy_des_entity.reverse()
-        nombre_entity_garder = round( (len(self.listDesEntity) * self._tauxDeSelection)/100)
+        nombre_entity_garder = round((len(self.listDesEntity) * self._tauxDeSelection) / 100)
 
         self.listDesEntity[:] = copy_des_entity[:nombre_entity_garder]
 
-    def tri_insertion(self,L):
+    def tri_insertion(self, L):
         N = len(L)
         for n in range(1, N):
             cle = L[n]
             j = n - 1
             while j >= 0 and L[j].get_fitness() > cle.get_fitness():
-                L[j + 1] = L[j] # decalage
+                L[j + 1] = L[j]  # decalage
                 j = j - 1
             L[j + 1] = cle
-
-
-
-
 
     def crossover(self):
         copyList = []
         copyList[:] = self.listDesEntity
-        cut = round(len(self._objectif)/2)
-        for i in range(0,len(copyList),2):
-            if i+1 < len(copyList):
-                self.listDesEntity.append(Entity(copyList[i].get_gene()[:cut]+copyList[i+1].get_gene()[cut:]))
+        cut = round(len(self._objectif) / 2)
+        for i in range(0, len(copyList), 2):
+            if i + 1 < len(copyList):
+                self.listDesEntity.append(Entity(copyList[i].get_gene()[:cut] + copyList[i + 1].get_gene()[cut:]))
                 # self.listDesEntity.remove(copyList[i])
                 # self.listDesEntity.remove(copyList[i+1])
 
-
     def mutation(self):
         for i in range(len(self.listDesEntity)):
-            r = round(random.random()*100);
+            r = round(random.random() * 100);
             if r <= self._tauxDeMutation:
                 self.listDesEntity[i].mutation_gene()
                 self.listDesEntity[i].fitness(self._objectif)
 
-
     def go(self):
         i = 0
         while i < 1000 and self.listDesEntity[0].get_fitness() != 1:
-            print("generation "+str(i)+" nombre d'habitant "+str(len(self.listDesEntity)))
-            print("individu 0 est "+self.listDesEntity[0].to_string())
+            print("generation " + str(i) + " nombre d'habitant " + str(len(self.listDesEntity)))
+            print("individu 0 est " + self.listDesEntity[0].to_string())
             # self.printList()
             self.selection()
             # print("fin de la selection")
@@ -100,10 +97,12 @@ class CycleDeLaVie:
             print(e.to_string())
 
 
-m = CycleDeLaVie(500, 50, 67, "Bonjour je suis une madame")
-m.go()
-print(m.listDesEntity[0].to_string())
+# m = CycleDeLaVie(500, 50, 67, "Bonjour je suis une madame")
+# m.go()
+# print(m.listDesEntity[0].to_string())
 
 # e = Entity("nuy")
 # e.fitness("baa")
 # print(e.get_fitness())
+list = [Ville(1, 1, "Paris", 1), Ville(2, 1, "Montpellier", 2), Ville(1, 2, "Lyon", 4), Ville(2, 2, "Toulouse", 3)]
+e = EntityVille(list)

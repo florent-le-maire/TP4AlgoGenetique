@@ -7,20 +7,18 @@ class EntityVille:
         self._gene = gene
         self._Efitness = 0
 
-    def fitness(self,but):
+    def fitness(self):
         self._Efitness = 0
-        for i in range(len(self._gene)):
-            if self._gene[i] == but[i]:
-                self._Efitness += 1
-        self._Efitness /= len(self._gene)
-        # self._Efitness = random.random()
+        for i in range(0,len(self._gene)):
+            deux = (i+1)%len(self._gene)
+            self._Efitness += self._gene[i].get_distance_entre_ville(self._gene[deux])
+        return 1/self._Efitness
 
 
     def mutation_gene(self):
-        mut_indice = round(random.random() * (len(self._gene)-1))
-        mot_tmp = list(self._gene)
-        mot_tmp[mut_indice] = random.choice(string.ascii_letters + string.whitespace)
-        self._gene = ''.join(mot_tmp)
+        list1 = random.sample(range(len(self._gene)-1), 2)
+        mut_ville_1 = list1[0]
+        mut_ville_2 = list1[1]
 
 
     def get_fitness(self):

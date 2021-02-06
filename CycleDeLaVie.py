@@ -62,8 +62,10 @@ class CycleDeLaVie:
 
     def mutation(self):
         for i in range(len(self.listDesEntity)):
-            self.listDesEntity[i].mutation_gene()
-            self.listDesEntity[i].fitness(self._objectif)
+            r = round(random.random()*100);
+            if r <= self._tauxDeMutation:
+                self.listDesEntity[i].mutation_gene()
+                self.listDesEntity[i].fitness(self._objectif)
 
 
     def go(self):
@@ -98,9 +100,9 @@ class CycleDeLaVie:
             print(e.to_string())
 
 
-m = CycleDeLaVie(500, 1, 66.5, "Bonjour je suis un monsieur")
+m = CycleDeLaVie(500, 50, 67, "Bonjour je suis une madame")
 m.go()
-m.printList()
+print(m.listDesEntity[0].to_string())
 
 # e = Entity("nuy")
 # e.fitness("baa")

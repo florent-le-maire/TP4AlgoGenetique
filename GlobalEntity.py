@@ -1,0 +1,26 @@
+from abc import ABC, abstractmethod, abstractproperty
+
+
+class GlobalEntity(ABC):
+
+    @abstractmethod
+    def fitness(self, but): pass
+
+    @abstractmethod
+    def cross_over(self, entity2): pass
+
+    @abstractmethod
+    def mutation_gene(self): pass
+
+    @abstractmethod
+    def get_fitness(self): pass
+
+    @abstractmethod
+    def get_gene(self): pass
+
+    @staticmethod
+    @abstractmethod
+    def get_random_global_entity(length): pass
+
+    @abstractmethod
+    def to_string(self): pass

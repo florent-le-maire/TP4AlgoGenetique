@@ -1,8 +1,9 @@
 import random
 import string
+from GlobalEntity import GlobalEntity
 
 
-class Entity:
+class Entity(GlobalEntity):
     def __init__(self,gene):
         self._gene = gene
         self._Efitness = 0

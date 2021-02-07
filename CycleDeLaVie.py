@@ -103,8 +103,8 @@ class CycleDeLaVie:
 # print(m.listDesEntity[0].to_string())
 
 
-list = [Ville(1, 1, "Paris", 1), Ville(2, 1, "Montpellier", 2), Ville(1, 2, "Lyon", 4), Ville(2, 2, "Toulouse", 3)]
-m = CycleDeLaVie(500, 50, 67, list, "ville")
+list = [Ville(1, 1, "Paris", 1), Ville(2, 1, "Montpellier", 2), Ville(3, 1, "Toulouse", 3), Ville(4, 1, "Lyon", 4)]
+m = CycleDeLaVie(500, 30, 67, list, "ville")
 m.go()
 print(m.listDesEntity[0].to_string())
 

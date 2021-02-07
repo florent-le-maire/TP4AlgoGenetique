@@ -9,11 +9,7 @@ class Ville:
         self._id = id
 
     def get_distance_entre_ville(self, ville2):
-        dist = sqrt((ville2._x - self._x) ** 2 + (ville2._y - self._y) ** 2)
-        return dist
-
-    def __hash__(self):
-        return hash(self._id)
+        return sqrt((ville2._x - self._x) ** 2 + (ville2._y - self._y) ** 2)
 
     def get_id(self):
         return self._id

@@ -13,7 +13,7 @@ class EntityVille(GlobalEntity):
         for i in range(0, len(self._gene)):
             deux = (i + 1) % len(self._gene)
             self._Efitness += self._gene[i].get_distance_entre_ville(self._gene[deux])
-        return 1 / self._Efitness
+        self._Efitness = (1 / self._Efitness)
 
     def cross_over(self, ville2):
         portion = random.sample(range(len(self._gene)), 2)

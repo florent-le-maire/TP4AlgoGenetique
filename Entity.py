@@ -33,9 +33,9 @@ class Entity(GlobalEntity):
         return self._gene
 
     @staticmethod
-    def get_random_global_entity(length):
+    def get_random_global_entity(list_obj):
         letters = string.ascii_letters + string.whitespace
-        return ''.join(random.choice(letters) for i in range(length))
+        return ''.join(random.choice(letters) for i in range(len(list_obj)))
 
     def to_string(self):
         return "[ gene = "+ self._gene+" "+" fitness = "+str(self._Efitness)+"]"

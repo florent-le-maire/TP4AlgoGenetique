@@ -20,7 +20,7 @@ class GlobalEntity(ABC):
 
     @staticmethod
     @abstractmethod
-    def get_random_global_entity(length): pass
+    def get_random_global_entity(list_obj): pass
 
     @abstractmethod
     def to_string(self): pass

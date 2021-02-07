@@ -18,12 +18,13 @@ from Ville import Ville
 
 
 class CycleDeLaVie:
-    def __init__(self, pop, tmut, tsel, objectif):
+    def __init__(self, pop, tmut, tsel, objectif, type):
         self._tauxDeMutation = tmut
         self._nombreDePop = pop
         self._tauxDeSelection = tsel  # en pourcentage
         self._objectif = objectif
         self.listDesEntity = []  # La liste en public pour faire des test il faut la mettre en privé
+        self._type = type
         self.construction_ecosystem()
 
     def selection(self):
@@ -62,6 +63,8 @@ class CycleDeLaVie:
         for i in range(len(self.listDesEntity)):
             r = round(random.random() * 100)
             if r <= self._tauxDeMutation:
+                if i == 325:
+                    print(i)
                 self.listDesEntity[i].mutation_gene()
                 self.listDesEntity[i].fitness(self._objectif)
 
@@ -85,14 +88,23 @@ class CycleDeLaVie:
 
     def construction_ecosystem(self):
         for i in range(self._nombreDePop):
-            self.listDesEntity.append(Entity(Entity.get_random_global_entity(len(self._objectif))))
+            if self._type == "entity":
+                self.listDesEntity.append(Entity(Entity.get_random_global_entity(self._objectif)))
+            else:
+                self.listDesEntity.append(EntityVille(EntityVille.get_random_global_entity(self._objectif)))
 
     def print_list(self):
         for e in self.listDesEntity:
             print(e.to_string())
 
 
-m = CycleDeLaVie(500, 50, 67, "Je vend une renault peugeaot")
+# m = CycleDeLaVie(500, 50, 67, "Je vend une renault peugeaot", "entity")
+# m.go()
+# print(m.listDesEntity[0].to_string())
+
+
+list = [Ville(1, 1, "Paris", 1), Ville(2, 1, "Montpellier", 2), Ville(1, 2, "Lyon", 4), Ville(2, 2, "Toulouse", 3)]
+m = CycleDeLaVie(500, 50, 67, list, "ville")
 m.go()
 print(m.listDesEntity[0].to_string())
 

@@ -22,13 +22,12 @@ class EntityVille(GlobalEntity):
         copyList[:] = self._gene
         list_tmp = []
         list_tmp[:] = ville2._gene
-        print(portion[0], portion[1])
         set1 = set(x.get_id() for x in copyList[portion[0]:portion[1]])
         t = [x for x in list_tmp if x.get_id() not in set1]
 
         copyList[:portion[0]] = t[:portion[0]]
         copyList[portion[1]:] = t[portion[0]:]
-        return copyList
+        return EntityVille(copyList)
 
     def mutation_gene(self):
         swapList1 = random.sample(range(len(self._gene)), 2)
@@ -43,9 +42,12 @@ class EntityVille(GlobalEntity):
         return self._gene
 
     @staticmethod
-    def get_random_global_entity(length):
-        letters = string.ascii_letters + string.whitespace
-        return ''.join(random.choice(letters) for i in range(length))
+    def get_random_global_entity(list_obj):
+        random.shuffle(list_obj)
+        return list_obj
 
     def to_string(self):
-        return "[ gene = " + self._gene + " " + " fitness = " + str(self._Efitness) + "]"
+        string = ""
+        for v in self._gene:
+            string += str(v.get_id())
+        return "[ gene = " + string + " " + " fitness = " + str(self._Efitness) + "]"

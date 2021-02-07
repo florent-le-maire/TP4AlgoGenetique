@@ -85,14 +85,9 @@ class CycleDeLaVie:
 
     def construction_ecosystem(self):
         for i in range(self._nombreDePop):
-            self.listDesEntity.append(Entity(self.get_random_string(len(self._objectif))))
+            self.listDesEntity.append(Entity(Entity.get_random_global_entity(len(self._objectif))))
 
-    @staticmethod
-    def get_random_string(length):
-        letters = string.ascii_letters + string.whitespace
-        return ''.join(random.choice(letters) for i in range(length))
-
-    def printList(self):
+    def print_list(self):
         for e in self.listDesEntity:
             print(e.to_string())
 

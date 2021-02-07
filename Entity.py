@@ -15,6 +15,9 @@ class Entity:
         self._Efitness /= len(self._gene)
         # self._Efitness = random.random()
 
+    def cross_over(self, entity2):
+        cut = round(len(self._gene) / 2)
+        return Entity(self._gene[:cut] + entity2.get_gene()[cut:])
 
     def mutation_gene(self):
         mut_indice = round(random.random() * (len(self._gene)-1))

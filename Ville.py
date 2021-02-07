@@ -12,6 +12,9 @@ class Ville:
         dist = sqrt((ville2._x - self._x) ** 2 + (ville2._y - self._y) ** 2)
         return dist
 
+    def __hash__(self):
+        return hash(self._id)
+
     def get_id(self):
         return self._id
 

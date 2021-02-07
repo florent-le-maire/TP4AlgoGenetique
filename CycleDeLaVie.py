@@ -51,16 +51,16 @@ class CycleDeLaVie:
     def crossover(self):
         copyList = []
         copyList[:] = self.listDesEntity
-        cut = round(len(self._objectif) / 2)
+        # cut = round(len(self._objectif) / 2)
         for i in range(0, len(copyList), 2):
             if i + 1 < len(copyList):
-                self.listDesEntity.append(Entity(copyList[i].get_gene()[:cut] + copyList[i + 1].get_gene()[cut:]))
+                self.listDesEntity.append(copyList[i].cross_over(copyList[i+1]))
                 # self.listDesEntity.remove(copyList[i])
                 # self.listDesEntity.remove(copyList[i+1])
 
     def mutation(self):
         for i in range(len(self.listDesEntity)):
-            r = round(random.random() * 100);
+            r = round(random.random() * 100)
             if r <= self._tauxDeMutation:
                 self.listDesEntity[i].mutation_gene()
                 self.listDesEntity[i].fitness(self._objectif)
@@ -97,12 +97,15 @@ class CycleDeLaVie:
             print(e.to_string())
 
 
-# m = CycleDeLaVie(500, 50, 67, "Bonjour je suis une madame")
-# m.go()
-# print(m.listDesEntity[0].to_string())
+m = CycleDeLaVie(500, 50, 67, "Je vend une renault peugeaot")
+m.go()
+print(m.listDesEntity[0].to_string())
 
 # e = Entity("nuy")
 # e.fitness("baa")
 # print(e.get_fitness())
-list = [Ville(1, 1, "Paris", 1), Ville(2, 1, "Montpellier", 2), Ville(1, 2, "Lyon", 4), Ville(2, 2, "Toulouse", 3)]
-e = EntityVille(list)
+# list = [Ville(1, 1, "Paris", 1), Ville(2, 1, "Montpellier", 2), Ville(1, 2, "Lyon", 4), Ville(2, 2, "Toulouse", 3)]
+# list2 = [Ville(1, 1, "Paris", 2), Ville(2, 1, "Montpellier", 1), Ville(2, 2, "Toulouse", 3), Ville(1, 2, "Lyon", 4)]
+# e = EntityVille(list)
+# e2 = EntityVille(list2)
+# e.cross_over(e2)

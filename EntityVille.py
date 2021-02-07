@@ -14,11 +14,26 @@ class EntityVille:
             self._Efitness += self._gene[i].get_distance_entre_ville(self._gene[deux])
         return 1/self._Efitness
 
+    def cross_over(self,ville2):
+        portion = random.sample(range(len(self._gene)), 2)
+        portion.sort()
+        copyList = []
+        copyList[:] = self._gene
+        list_tmp = []
+        list_tmp[:] = ville2._gene
+        print(portion[0],portion[1])
+        set1 = set(x.get_id() for x in copyList[portion[0]:portion[1]])
+        t = [x for x in list_tmp if x.get_id() not in set1]
+
+        copyList[:portion[0]] = t[:portion[0]]
+        copyList[portion[1]:] = t[portion[0]:]
+        return copyList
 
     def mutation_gene(self):
-        list1 = random.sample(range(len(self._gene)-1), 2)
-        mut_ville_1 = list1[0]
-        mut_ville_2 = list1[1]
+        swapList1 = random.sample(range(len(self._gene)), 2)
+        vTmp = self._gene[swapList1[0]]
+        self._gene[swapList1[0]] = self._gene[swapList1[1]]
+        self._gene[swapList1[1]] = vTmp
 
 
     def get_fitness(self):

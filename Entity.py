@@ -40,4 +40,5 @@ class Entity(GlobalEntity):
     def to_string(self):
         return "[ gene = "+ self._gene+" "+" fitness = "+str(self._Efitness)+"]"
 
-
+    def conditionDarret(self,i,listDesE,nbGen):
+        return i < nbGen and listDesE[0].get_fitness() != 1

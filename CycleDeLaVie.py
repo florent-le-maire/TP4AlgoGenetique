@@ -3,19 +3,45 @@ import string
 from Entity import Entity
 from EntityVille import EntityVille
 from Ville import Ville
+import matplotlib.pyplot as plt
+
+def dessiner(listDesVilles):
+    plt.clf()
+
+    listX = []
+    listY = []
+    x = 100
+    y = 100
+    coordXFirst = 0
+    coordYFirst = 0
+    firstGene = True
+    for ville in listDesVilles[0].get_gene():
+        if firstGene:
+            firstGene = False
+            coordXFirst = ville.get_coordX()
+            coordYFirst = ville.get_coordY()      
+        listX.append(ville.get_coordX())
+        listY.append(ville.get_coordY())
+    
+    listX.append(coordXFirst)
+    listY.append(coordYFirst)
+    x = listX    
+    y = listY
+    plt.plot(x,y,'ro')    
+    plt.plot(x,y,'b-')    
+
+    plt.draw()
+    plt.pause(0.0001)
 
 
-# def tri_ins(t, j=1):
-#     if j < len(t):
-#         insere(t, j)
-#         tri_ins(t, j + 1)
-#
-#
-# def insere(t, j):
-#     if j > 0 and t[j] < t[j - 1]:
-#         t[j - 1], t[j] = t[j], t[j - 1]
-#         insere(t, j - 1)
 
+
+def generateurDeVille(nb,listARemplir):
+    for i in range(nb):
+        x = random.randrange(100)
+        y = random.randrange(100)
+        listARemplir.append(Ville(x,y,str(i),i))
+    return listARemplir
 
 class CycleDeLaVie:
     def __init__(self, pop, tmut, tsel, objectif, type):
@@ -70,7 +96,7 @@ class CycleDeLaVie:
 
     def go(self):
         i = 0
-        while i < 1000 and self.listDesEntity[0].get_fitness() != 1:
+        while self.listDesEntity[0].conditionDarret(i,self.listDesEntity,300):
             print("generation " + str(i) + " nombre d'habitant " + str(len(self.listDesEntity)))
             print("individu 0 est " + self.listDesEntity[0].to_string())
             # self.printList()
@@ -83,6 +109,8 @@ class CycleDeLaVie:
             self.mutation()
             # print("fin de la mutation")
             # self.printList()
+            if self._type =="ville":
+                dessiner(self.listDesEntity)
 
             i += 1
 
@@ -98,15 +126,18 @@ class CycleDeLaVie:
             print(e.to_string())
 
 
-# m = CycleDeLaVie(500, 50, 67, "Je vend une renault peugeaot", "entity")
+# m = CycleDeLaVie(500, 50, 67, "hehe je suis malin", "entity")
 # m.go()
 # print(m.listDesEntity[0].to_string())
 
 
-list = [Ville(1, 1, "Paris", 1), Ville(2, 1, "Montpellier", 2), Ville(3, 1, "Toulouse", 3), Ville(4, 1, "Lyon", 4)]
-m = CycleDeLaVie(500, 30, 67, list, "ville")
+# list = [Ville(1, 1, "Paris", 1), Ville(2, 1, "Montpellier", 2), Ville(3, 1, "Toulouse", 3), Ville(4, 1, "Lyon", 4)]
+listDeVille = []
+listDeVille = generateurDeVille(20,listDeVille)
+m = CycleDeLaVie(500, 30, 67, listDeVille, "ville")
 m.go()
 print(m.listDesEntity[0].to_string())
+
 
 # e = Entity("nuy")
 # e.fitness("baa")

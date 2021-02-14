@@ -13,6 +13,12 @@ class Ville:
 
     def get_id(self):
         return self._id
+    
+    def get_coordX(self):
+        return self._x
+    
+    def get_coordY(self):
+        return self._y
 
     def to_string(self):
         return "[ coord = " + str(self._x) + ',' + str(self._y) + " " + " id = " + str(self._id) + "]"

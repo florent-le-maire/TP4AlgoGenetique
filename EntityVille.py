@@ -45,6 +45,20 @@ class EntityVille(GlobalEntity):
     def get_random_global_entity(list_obj):
         random.shuffle(list_obj)
         return list_obj
+    
+    def conditionDarret(self,i,listDesE,nbGen):
+        mean = 0
+        value = 0
+        for ville in listDesE:
+            ville.fitness()
+            value += ville.get_fitness()
+        
+        mean = value / len(listDesE)
+        
+        print(mean)
+            
+        return i < nbGen and listDesE[0].get_fitness() != mean and listDesE[0].get_fitness() != 1
+
 
     def to_string(self):
         string = ""

@@ -24,3 +24,6 @@ class GlobalEntity(ABC):
 
     @abstractmethod
     def to_string(self): pass
+
+    @abstractmethod
+    def conditionDarret(self,i,listDesE,nbGen): pass
